@@ -1,5 +1,5 @@
 import ResizableBox from "./ResizableBox";
-import useDemoConfig from "./useDemoConfig";
+// import useDemoConfig from "./useDemoConfig";
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-charts";
 
@@ -10,18 +10,15 @@ export default function Bar(props) {
       data: [{ primary: new Date(), secondary: 0 }],
     },
   ]);
-
+  console.log(score);
   useEffect(() => {
-    setScore(prevScore => {
-      const newData = [...prevScore[0].data, { primary: new Date(), secondary: props.score }];
-      return [{ label: "Score", data: newData }];
-    });
-  }, [props.score]);
-
-  const { data } = useDemoConfig({
-    series: 10,
-    dataType: "time",
-  });
+    setScore([
+      {
+        label: "Score",
+        data: props.totalResult,
+      },
+    ]);
+  }, [props]);
 
   const primaryAxis = React.useMemo(
     () => ({
@@ -34,20 +31,20 @@ export default function Bar(props) {
     () => [
       {
         getValue: (datum) => datum.secondary,
-        stacked: true,
+        // stacked: true,
         // OR
         // elementType: "area",
       },
     ],
     []
   );
-  console.log(data, score);
+
   return (
     <>
       <br />
       <br />
       <ResizableBox>
-        {score ? (
+        {!props.loading ? (
           <Chart
             options={{
               data: score ?? [],

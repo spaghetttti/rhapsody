@@ -9,8 +9,18 @@ export function calculateMentalHealthScore(formData) {
       totalScore += parseFloat(formData[questionId]); // Ensure value is converted to a number
     }
   }
-
+  const interpretation = calculateInterpretation(totalScore);
   // Interpret the score (adjust ranges based on chosen assessment tool)
+
+  // Return the score and interpretation as an object
+  return {
+    score: Math.floor(totalScore),
+    interpretation: interpretation,
+    time: new Date(),
+  };
+}
+
+export function calculateInterpretation(totalScore) {
   let interpretation;
   if (totalScore >= 5) {
     interpretation =
@@ -26,6 +36,5 @@ export function calculateMentalHealthScore(formData) {
       "Votre score indique un besoin significatif de soutien. Veuillez contacter immédiatement une ligne d'assistance en cas de crise ou un professionnel de la santé mentale.";
   }
 
-  // Return the score and interpretation as an object
-  return { score: Math.floor(totalScore), interpretation: interpretation, time: new Date()};
+  return interpretation;
 }
