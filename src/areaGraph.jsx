@@ -1,7 +1,7 @@
 import ResizableBox from "./ResizableBox";
 import useDemoConfig from "./useDemoConfig";
 import React, { useEffect, useState } from "react";
-import { AxisOptions, Chart } from "react-charts";
+import { Chart } from "react-charts";
 
 export default function Bar(props) {
   const [score, setScore] = useState([
@@ -18,7 +18,7 @@ export default function Bar(props) {
     });
   }, [props.score]);
 
-  const { data, randomizeData } = useDemoConfig({
+  const { data } = useDemoConfig({
     series: 10,
     dataType: "time",
   });

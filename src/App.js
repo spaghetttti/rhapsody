@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import MentalHealthForm from './form';
 import MentalHealthAssessment from './form';
