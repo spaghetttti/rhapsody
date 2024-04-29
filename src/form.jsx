@@ -25,6 +25,7 @@ const MentalHealthAssessment = ({ currentUser }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     const result = calculateMentalHealthScore(formData);
     setResult(result);
     submitAssessment(result, currentUser.email).then(() =>
