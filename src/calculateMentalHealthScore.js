@@ -5,8 +5,10 @@ export function calculateMentalHealthScore(formData) {
   for (const questionId in formData) {
     console.log(formData[questionId]);
     if (formData.hasOwnProperty(questionId)) {
-      console.log(formData[questionId]);
-      totalScore += parseFloat(formData[questionId]); // Ensure value is converted to a number
+      const score = parseFloat(formData[questionId]); // Attempt conversion
+      if (!isNaN(score)) { // Check if conversion is valid
+        totalScore += score;
+      }
     }
   }
   const interpretation = calculateInterpretation(totalScore);
