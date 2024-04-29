@@ -138,7 +138,7 @@ const MentalHealthAssessment = ({ currentUser }) => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          Submit Assessment
+          Soumettre l'évaluation
         </button>
       </form>
       Votre score la plus recent est {shortResult.latest.score}
@@ -150,7 +150,7 @@ const MentalHealthAssessment = ({ currentUser }) => {
       {shortResult.average.interpretation}
       <br />
       {loading ? (
-        "loading..."
+        "chargement..."
       ) : (
         <Bar loading={loading} totalResult={totalResult} />
       )}

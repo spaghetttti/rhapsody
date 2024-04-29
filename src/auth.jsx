@@ -112,7 +112,7 @@ const AuthPage = () => {
               className="block text-gray-700 font-bold mb-2 mt-4"
               htmlFor="password"
             >
-              Password
+              Mot de passe
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -131,7 +131,7 @@ const AuthPage = () => {
             </button>
           </form>
           <p className="text-center mt-4">
-            Don't have an account?{" "}
+            Vous n'avez pas de compte ?{" "}
             <button
               className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-700 mt-4"
               onClick={handleSignup}
