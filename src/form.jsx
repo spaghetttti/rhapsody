@@ -29,7 +29,7 @@ const MentalHealthAssessment = ({ currentUser }) => {
     const result = calculateMentalHealthScore(formData);
     setResult(result);
     submitAssessment(result, currentUser.email).then(() =>
-      window.location.reload()
+      fetchUserAssessments()
     );
   };
 
@@ -46,50 +46,50 @@ const MentalHealthAssessment = ({ currentUser }) => {
     return 0;
   };
 
-  useEffect(() => {
-    const fetchUserAssessments = async () => {
-      if (currentUser) {
-        setLoading(true);
-        try {
-          const assessments = await getUserAssessments(currentUser.email);
-          console.log(assessments);
-          if (assessments.length > 0) {
-            const data = [];
-            let scoreSum = 0;
-            const assessmentsNumber = assessments.length;
-            assessments.forEach((assessment) => {
-              const timestamp = assessment.result.time;
-              scoreSum += assessment.result.score;
-              const milliseconds =
-                timestamp.seconds * 1000 +
-                Math.floor(timestamp.nanoseconds / 1000000);
-              data.push({
-                primary: new Date(milliseconds),
-                secondary: assessment.result.score,
-              });
+  const fetchUserAssessments = async () => {
+    if (currentUser) {
+      setLoading(true);
+      try {
+        const assessments = await getUserAssessments(currentUser.email);
+        console.log(assessments);
+        if (assessments.length > 0) {
+          const data = [];
+          let scoreSum = 0;
+          const assessmentsNumber = assessments.length;
+          assessments.forEach((assessment) => {
+            const timestamp = assessment.result.time;
+            scoreSum += assessment.result.score;
+            const milliseconds =
+              timestamp.seconds * 1000 +
+              Math.floor(timestamp.nanoseconds / 1000000);
+            data.push({
+              primary: new Date(milliseconds),
+              secondary: assessment.result.score,
             });
-            setShortResult({
-              average: {
-                score: Math.floor(scoreSum / assessmentsNumber),
-                interpretation: calculateInterpretation(
-                  Math.floor(scoreSum / assessmentsNumber)
-                ),
-              },
-              latest: {
-                score: assessments[assessmentsNumber - 1].result.score,
-                interpretation:
-                  assessments[assessmentsNumber - 1].result.interpretation,
-              },
-            });
-            setResult(data.sort(compareDates));
-            setLoading(false);
-          }
-        } catch (error) {
-          console.log(error);
+          });
+          setShortResult({
+            average: {
+              score: Math.floor(scoreSum / assessmentsNumber),
+              interpretation: calculateInterpretation(
+                Math.floor(scoreSum / assessmentsNumber)
+              ),
+            },
+            latest: {
+              score: assessments[assessmentsNumber - 1].result.score,
+              interpretation:
+                assessments[assessmentsNumber - 1].result.interpretation,
+            },
+          });
+          setResult(data.sort(compareDates));
+          setLoading(false);
         }
+      } catch (error) {
+        console.log(error);
       }
-    };
+    }
+  };
 
+  useEffect(() => {
     fetchUserAssessments();
   }, [currentUser]);
 
