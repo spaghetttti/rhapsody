@@ -32,6 +32,19 @@ const MentalHealthAssessment = ({ currentUser }) => {
     );
   };
 
+  const compareDates = (a, b) => {
+    const dateA = a.primary;
+    const dateB = b.primary;
+
+    if (dateA < dateB) {
+      return -1;
+    }
+    if (dateA > dateB) {
+      return 1;
+    }
+    return 0;
+  };
+
   useEffect(() => {
     const fetchUserAssessments = async () => {
       if (currentUser) {
@@ -67,7 +80,7 @@ const MentalHealthAssessment = ({ currentUser }) => {
                   assessments[assessmentsNumber - 1].result.interpretation,
               },
             });
-            setResult(data);
+            setResult(data.sort(compareDates));
             setLoading(false);
           }
         } catch (error) {

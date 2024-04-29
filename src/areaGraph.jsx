@@ -31,7 +31,7 @@ export default function Bar(props) {
     () => [
       {
         getValue: (datum) => datum.secondary,
-        // stacked: true,
+        stacked: true,
         // OR
         // elementType: "area",
       },

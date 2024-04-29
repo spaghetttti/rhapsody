@@ -6,7 +6,11 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "chai": "^5.1.0",
+    "enzyme": "^3.11.0",
     "firebase": "^10.11.1",
+    "jest": "^27.5.1",
+    "mocha": "^10.4.0",
     "react": "^18.3.1",
     "react-charts": "^3.0.0-beta.57",
     "react-dom": "^18.3.1",
@@ -18,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha src/*.test.mjs",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -40,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.0.0",
     "tailwindcss": "^3.4.3"
   }
 }
